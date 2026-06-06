@@ -1,0 +1,39 @@
+name: bus_tracker_driver
+description: University Bus Tracker - Driver App
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # HTTP client
+  dio: ^5.4.0
+  # Secure token storage
+  flutter_secure_storage: ^9.0.0
+  # JSON serialization helpers
+  json_annotation: ^4.8.1
+  # GPS location
+  geolocator: ^10.1.0
+  # Background execution / foreground service
+  flutter_foreground_task: ^6.1.2
+  # Google Maps (to show route on active trip screen)
+  google_maps_flutter: ^2.5.3
+  # QR scanner (Phase 8)
+  mobile_scanner: ^3.5.6
+  # Permissions for camera (Phase 8)
+  permission_handler: ^11.0.1
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.8
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
