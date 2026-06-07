@@ -128,14 +128,14 @@ class ApiService {
   /// only network/server errors are surfaced as `success = false`.
   Future<ApiResponse<ValidationResult>> validatePass({
     required String qrCode,
-    required String tripId,
+    String? tripId,
     double? latitude,
     double? longitude,
   }) async {
     return _request(
       () => _dio.post(ApiConstants.validatePass, data: {
         'qr_code': qrCode,
-        'trip_id': tripId,
+        if (tripId != null) 'trip_id': tripId,
         if (latitude != null) 'latitude': latitude,
         if (longitude != null) 'longitude': longitude,
       }),

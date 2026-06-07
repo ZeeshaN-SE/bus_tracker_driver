@@ -5,7 +5,6 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/network/api_service.dart';
-import '../models/validation_result.dart';
 import 'scan_result_screen.dart';
 
 /// Live camera-based QR scanner for the driver. After detecting a QR code, it
@@ -15,9 +14,9 @@ import 'scan_result_screen.dart';
 /// - We pause the camera while a network call is in-flight to avoid duplicate scans.
 /// - On result, we navigate (not replace) so the user can pop back to scan another.
 class ScanQrScreen extends StatefulWidget {
-  final String tripId;
+  final String? tripId;
 
-  const ScanQrScreen({super.key, required this.tripId});
+  const ScanQrScreen({super.key, this.tripId});
 
   @override
   State<ScanQrScreen> createState() => _ScanQrScreenState();
