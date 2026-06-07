@@ -7,6 +7,7 @@ import '../../../core/storage/token_storage.dart';
 import '../models/trip.dart';
 import '../../auth/screens/login_screen.dart';
 import '../../active_trip/screens/active_trip_screen.dart';
+import '../../scan/screens/scan_qr_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -480,6 +481,28 @@ class _TripCard extends StatelessWidget {
                   ),
                   icon: const Icon(Icons.navigation),
                   label: const Text('Resume'),
+                ),
+              ),
+            ],
+            if (trip.status == 'scheduled' || trip.status == 'in_progress') ...[
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        settings: const RouteSettings(name: '/scan_qr'),
+                        builder: (_) => ScanQrScreen(tripId: trip.id),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueGrey[700],
+                    foregroundColor: Colors.white,
+                  ),
+                  icon: const Icon(Icons.qr_code_scanner),
+                  label: const Text('Scan Pass'),
                 ),
               ),
             ],
