@@ -174,6 +174,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _loadTrips();
   }
 
+  Future<void> _openScanPass() async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        settings: const RouteSettings(name: '/scan_qr'),
+        builder: (_) => const ScanQrScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,24 +202,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
           // one-tap entry point. Always visible at the top of the dashboard.
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
-            child: SizedBox(
-              height: 56,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+            child: Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 56,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: _openLiveStart,
+                      icon: const Icon(Icons.share_location, size: 26),
+                      label: const Text(
+                        'Start Live Location',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ),
                 ),
-                onPressed: _openLiveStart,
-                icon: const Icon(Icons.share_location, size: 26),
-                label: const Text(
-                  'Start Live Location',
-                  style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: SizedBox(
+                    height: 56,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueGrey[700],
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: _openScanPass,
+                      icon: const Icon(Icons.qr_code_scanner, size: 26),
+                      label: const Text(
+                        'Scan Pass',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
           // Filter chips
@@ -481,28 +518,6 @@ class _TripCard extends StatelessWidget {
                   ),
                   icon: const Icon(Icons.navigation),
                   label: const Text('Resume'),
-                ),
-              ),
-            ],
-            if (trip.status == 'scheduled' || trip.status == 'in_progress') ...[
-              const SizedBox(height: 12),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        settings: const RouteSettings(name: '/scan_qr'),
-                        builder: (_) => ScanQrScreen(tripId: trip.id),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueGrey[700],
-                    foregroundColor: Colors.white,
-                  ),
-                  icon: const Icon(Icons.qr_code_scanner),
-                  label: const Text('Scan Pass'),
                 ),
               ),
             ],
